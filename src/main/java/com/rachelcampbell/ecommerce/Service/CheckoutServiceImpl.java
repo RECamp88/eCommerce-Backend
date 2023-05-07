@@ -4,14 +4,13 @@ import com.rachelcampbell.ecommerce.DTO.Purchase;
 import com.rachelcampbell.ecommerce.DTO.PurchaseResponse;
 import com.rachelcampbell.ecommerce.Model.Customer;
 import com.rachelcampbell.ecommerce.Model.Order;
-import com.rachelcampbell.ecommerce.Model.OrderItem;
+import com.rachelcampbell.ecommerce.Model.Product;
 import com.rachelcampbell.ecommerce.Repository.CustomerRepo;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Set;
-import java.util.UUID;
+import java.util.List;
 
 @Service
 public class CheckoutServiceImpl implements CheckoutService {
@@ -29,19 +28,12 @@ public class CheckoutServiceImpl implements CheckoutService {
     public PurchaseResponse placeOrder(Purchase purchase) {
         //retrieve the order info from dto
         Order order = purchase.getOrder();
-        //generate tracking number
-        String orderTrackingNumber = generateOrderTrackingNumber();
-        order.setOrderTrackingNumber(orderTrackingNumber);
 
         // populate order with orderItems
         //get the items from the purchase DTO then loop through them and add them to the order
-        Set<OrderItem> orderItems = purchase.getOrderItems();
-        orderItems.forEach(order::add);
+        List<Product> orderProducts = purchase.getOrderProducts();
+        orderProducts.forEach(order::add);
 
-        //populate order with billingAddress and ShippingAddress
-      /*  order.setBillingAddress(purchase.getBillingAddress());
-        order.setShippingAddress(purchase.getShippingAddress());
-*/
         // populate customer with order
         Customer customer = purchase.getCustomer();
         customer.add(order);
@@ -49,12 +41,8 @@ public class CheckoutServiceImpl implements CheckoutService {
         //save to the database
         customerRepo.save(customer);
         //return a response
-        return new PurchaseResponse(orderTrackingNumber);
+        return new PurchaseResponse(order.getId());
     }
 
-    private String generateOrderTrackingNumber() {
-        //generate a random UUID
-        // a UUID (Universally Unique IDentifier)
-       return UUID.randomUUID().toString();
-    }
+
 }

@@ -1,10 +1,12 @@
 package com.rachelcampbell.ecommerce.DTO;
 
-import com.rachelcampbell.ecommerce.Model.OrderItem;
+
+import com.rachelcampbell.ecommerce.Model.Product;
 import lombok.Data;
 import com.rachelcampbell.ecommerce.Model.Customer;
 import com.rachelcampbell.ecommerce.Model.Order;
 
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -12,7 +14,7 @@ public class Purchase {
 
     private Customer customer;
     private Order order;
-    private Set<OrderItem> orderItems;
+    private List<Product> orderProducts;
 
 }
 

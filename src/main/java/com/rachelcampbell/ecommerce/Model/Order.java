@@ -10,22 +10,8 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.math.BigDecimal;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
-/*
- * This current project is untilizing mySQL which I have installed on my computer.
- * For deployment, I plan on utilizng AWS EC2 and RDS
- * Normally if you are utilizing a database such as H2, you would not need to utilize the @Column annotation
- * This is used because I am mapping to the tables that were created in mySQL
- * If you wanted to utilize H2 instead, you would need to add the dependency into the pom.xml instead of the mysql dependency.
- * Also, you would need to update the application.properties files.
- * This may also need to be done if you plan to preload data and schema by utilizing data.sql and schema.sql files.
- * UPDATE: although not a requirement (unless using data.sql and schema.sql) the @Column annotations can be skipped.
- * By default, the column names will be used by the JPA.
- * A great reason to use them is to declare explictly the names you are wanting to utilize.  This way in the future
- * if the schema does change, you can easily just update it here through the use of these annotations.
- * */
+import java.util.*;
+
 // The table name has to have an "s" added to the end because the word "order" is a keyword for SQL
 // If you do not make this change, then you will get auto DDL errors when compiling.
 
@@ -70,14 +56,14 @@ public class Order {
      * */
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "order")
     @JsonManagedReference
-    private Set<OrderItem> orderItems = new HashSet<>();
+    private List<Product> orderProducts = new ArrayList<>();
 
-    public void add(OrderItem item){
+    public void add(Product item){
         if (item != null){
-            if (orderItems == null) {
-                orderItems = new HashSet<>();
+            if (orderProducts == null) {
+                orderProducts = new ArrayList<>();
             }
-            orderItems.add(item);
+            orderProducts.add(item);
             item.setOrder(this);
         }
     }
