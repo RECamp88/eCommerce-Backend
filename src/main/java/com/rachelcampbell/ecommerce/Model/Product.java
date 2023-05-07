@@ -29,37 +29,22 @@ import java.util.Date;
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
 
-    @Column(name = "sku")
-    private String sku;
+    private int id;
 
-    @Column(name = "name")
+
     private String name;
 
-    @Column(name = "description")
-    private String description;
 
-    @Column(name = "unit_price")
-    private BigDecimal unitPrice;
+    private Double unitPrice;
 
-    @Column(name = "image_url")
+
     private String imageUrl;
 
-    @Column(name = "active")
-    private boolean active;
-
-    @Column(name = "Units_in_stock")
-    private int unitsInStock;
-
-    @Column(name = "date_created")
-    @CreationTimestamp
-    private Date dateCreated;
-
-    @Column(name = "last_updated")
-    @UpdateTimestamp
-    private Date lastUpdates;
-
-
+    public Product(int id, String name, Double unitPrice, String imageUrl) {
+        this.id = id;
+        this.name = name;
+        this.unitPrice = unitPrice;
+        this.imageUrl = imageUrl;
+    }
 }

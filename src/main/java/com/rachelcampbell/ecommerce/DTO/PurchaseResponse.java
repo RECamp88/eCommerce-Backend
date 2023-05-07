@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class PurchaseResponse {
-    private final String orderTrackingNumber;
+    private final String orderNumber;
 }
 
 // This is only used in retrieving an orderTrackingNumber.
