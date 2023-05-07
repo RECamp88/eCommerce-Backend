@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping("/checkout/")
+@RequestMapping("/api/checkout/")
 public class CheckoutController {
     private CheckoutService checkoutService;
 

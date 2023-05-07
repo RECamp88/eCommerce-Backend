@@ -3,7 +3,6 @@ package com.rachelcampbell.ecommerce.DTO;
 import com.rachelcampbell.ecommerce.Model.OrderItem;
 import lombok.Data;
 import com.rachelcampbell.ecommerce.Model.Customer;
-import com.rachelcampbell.ecommerce.Model.Address;
 import com.rachelcampbell.ecommerce.Model.Order;
 
 import java.util.Set;
@@ -12,8 +11,6 @@ import java.util.Set;
 public class Purchase {
 
     private Customer customer;
-    private Address shippingAddress;
-    private Address billingAddress;
     private Order order;
     private Set<OrderItem> orderItems;
 

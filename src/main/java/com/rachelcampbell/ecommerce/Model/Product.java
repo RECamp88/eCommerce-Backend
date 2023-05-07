@@ -7,7 +7,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.math.BigDecimal;
-import java.sql.Timestamp;
+import java.util.Date;
 /*
  * This current project is untilizing mySQL which I have installed on my computer.
  * For deployment, I plan on utilizng AWS EC2 and RDS
@@ -55,18 +55,11 @@ public class Product {
 
     @Column(name = "date_created")
     @CreationTimestamp
-    private Timestamp dateCreated;
+    private Date dateCreated;
 
     @Column(name = "last_updated")
     @UpdateTimestamp
-    private Timestamp lastUpdates;
+    private Date lastUpdates;
 
-    /*
-     * This is creating the relationship with products.
-     * There can be one category with many products in it.
-     * */
-    @ManyToOne
-    @JsonBackReference
-    @JoinColumn(name = "category_id")
-    private ProductCategory category;
+
 }

@@ -36,12 +36,12 @@ public class CheckoutServiceImpl implements CheckoutService {
         // populate order with orderItems
         //get the items from the purchase DTO then loop through them and add them to the order
         Set<OrderItem> orderItems = purchase.getOrderItems();
-        orderItems.forEach(item -> order.add(item));
+        orderItems.forEach(order::add);
 
         //populate order with billingAddress and ShippingAddress
-        order.setBillingAddress(purchase.getBillingAddress());
+      /*  order.setBillingAddress(purchase.getBillingAddress());
         order.setShippingAddress(purchase.getShippingAddress());
-
+*/
         // populate customer with order
         Customer customer = purchase.getCustomer();
         customer.add(order);

@@ -4,11 +4,13 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import java.sql.Time;
-import java.sql.Timestamp;
+import java.math.BigDecimal;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 /*
@@ -29,7 +31,8 @@ import java.util.Set;
 
 //This represents the customer's order.  In our case the order in the shopping cart.
 @Entity
-@Data
+@Setter
+@Getter
 @Table(name = "orders")
 public class Order {
 
@@ -45,18 +48,18 @@ public class Order {
     private int totalQuantity;
 
     @Column(name = "total_price")
-    private Double totalPrice;
+    private BigDecimal totalPrice;
 
-    @Column(name = "id")
+    @Column(name = "status")
     private String status;
 
     @Column(name = "date_created")
     @CreationTimestamp
-    private Timestamp dateCreated;
+    private Date dateCreated;
 
     @Column(name = "last_updated")
     @UpdateTimestamp
-    private Timestamp lastUpdated;
+    private Date lastUpdated;
 
     /*
     * This creates a relationship with customers.
@@ -67,13 +70,7 @@ public class Order {
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "shipping_address_id", referencedColumnName = "id")
-    private Address shippingAddress;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "billing_address_id", referencedColumnName = "id")
-    private Address billingAddress;
     /*
      * This is creating the relationship with order items.
      * There can be one order with many order items in it.
