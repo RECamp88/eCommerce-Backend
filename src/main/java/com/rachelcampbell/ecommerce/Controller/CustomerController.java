@@ -28,9 +28,8 @@ public class CustomerController {
     * @throws ServicesException customer already exists an error will be thrown stating the user already exists.
     *  */
     @PostMapping("register")
-    public ResponseEntity<Customer> registerCustomer(@RequestBody Customer customer) throws ServicesException {
-        customerService.registerCustomer(customer);
-        return new ResponseEntity<>(customer, HttpStatus.CREATED);
+    public Customer registerCustomer(@RequestBody Customer customer) throws ServicesException {
+        return customerService.registerCustomer(customer);
     }
 
     /*
@@ -41,10 +40,20 @@ public class CustomerController {
      * @throws ServicexException if customer is not a valid customer.
      */
     @PostMapping("login")
-    public ResponseEntity<Customer> loginCustomer(@RequestBody Customer customer) throws ServicesException {
-        customerService.loginCustomer(customer);
-        return new ResponseEntity<>(customer, HttpStatus.OK);
+    public Customer loginCustomer(@RequestBody Customer customer) throws ServicesException {
+        return customerService.loginCustomer(customer);
     }
 
+    /*
+    * Updating a customer's information
+    *
+    * @param customer's id
+    * @param customer object
+    * @returns the updated customer object
+    * */
+    @PatchMapping("customer/{id}")
+    public Customer updateCustomer(@PathVariable long id, @RequestBody Customer customer){
+        return customerService.udpateCustomer(id, customer);
+    }
 
 }

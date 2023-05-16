@@ -19,25 +19,25 @@ import java.util.Date;
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public int id;
 
-    private int id;
+    public String name;
 
-    private String name;
+    public Double unitPrice;
 
-    private Double unitPrice;
-
-    private String imageUrl;
+    public String productImg;
 
     @ManyToOne
     @JsonBackReference
     @JoinColumn(name = "order_id")
     private Order order;
 
-    public Product(int id, String name, Double unitPrice, String imageUrl) {
+    public Product(int id, String name, Double unitPrice, String img) {
         this.id = id;
         this.name = name;
         this.unitPrice = unitPrice;
-        this.imageUrl = imageUrl;
+        this.productImg = img;
+
     }
 
 }
