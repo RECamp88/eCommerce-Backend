@@ -41,8 +41,13 @@ public class CheckoutServiceImpl implements CheckoutService {
         //save to the database
         customerRepo.save(customer);
         //return a response
-        return new PurchaseResponse(order.getId());
+        return new PurchaseResponse(order.getId() + generateNum() );
     }
 
-
+    public int generateNum(){
+        int min = 10000;
+        int max = 400000;
+        int random_int = (int)Math.floor((Math.random() * (max - min +1) + min));
+        return random_int;
+    }
 }

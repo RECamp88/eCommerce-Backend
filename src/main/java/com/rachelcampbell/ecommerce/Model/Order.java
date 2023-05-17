@@ -31,11 +31,6 @@ public class Order {
 
     private BigDecimal totalPrice;
 
-    @CreationTimestamp
-    private Date dateCreated;
-
-    @UpdateTimestamp
-    private Date lastUpdated;
 
     /*
     * This creates a relationship with customers.
