@@ -17,7 +17,16 @@ public class ProductService {
         this.productRepo = productRepo;
     }
 
+    /*
+    * This returns a list of all the products.
+    * It is used to load the shop page on the frontend
+    * */
     public List<Product> getAllProducts() {
         return productRepo.findAll();
     }
+
+    /*
+    * This returns just one particular product.
+    */
+    public Product getProductById(int id) { return productRepo.findById(id).get(); }
 }

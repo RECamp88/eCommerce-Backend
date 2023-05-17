@@ -25,19 +25,21 @@ public class Product {
 
     public Double unitPrice;
 
+    public int quantity;
+
     public String productImg;
 
-    @ManyToOne
-    @JsonBackReference
-    @JoinColumn(name = "order_id")
-    private Order order;
 
-    public Product(int id, String name, Double unitPrice, String img) {
+    public Product(int id, String name, Double unitPrice, int quantity, String img) {
         this.id = id;
         this.name = name;
         this.unitPrice = unitPrice;
         this.productImg = img;
-
     }
+
+    public void increaseQuantity () { this.quantity ++;}
+
+    public void decreaseQuantity () { this.quantity --;}
+
 
 }

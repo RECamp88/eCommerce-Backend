@@ -22,29 +22,14 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String firstName;
+    private String name;
 
-    private String lastName;
-
-    private String address;
+    private double balance;
 
     private String email;
 
     private String password;
 
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer")
-    @JsonManagedReference
-    private List<Order> orders = new ArrayList<>();
-
-    public void add(Order order) {
-        if (order != null) {
-
-            if (orders == null){
-                orders = new ArrayList<>();
-            }
-            orders.add(order);
-            order.setCustomer(this);
-        }
-    }
+    @OneToMany
+    public List<Product> order;
 }

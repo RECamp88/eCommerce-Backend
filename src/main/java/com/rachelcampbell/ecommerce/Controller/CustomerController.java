@@ -45,15 +45,33 @@ public class CustomerController {
     }
 
     /*
-    * Updating a customer's information
-    *
-    * @param customer's id
-    * @param customer object
-    * @returns the updated customer object
-    * */
-    @PatchMapping("customer/{id}")
-    public Customer updateCustomer(@PathVariable long id, @RequestBody Customer customer){
-        return customerService.udpateCustomer(id, customer);
+     * This returns the customer by their id
+     * @param is the customer's id
+     * @return will return a customer object
+     */
+    @GetMapping("{id}")
+    public Customer getCustomer(@PathVariable long id) {
+        return customerService.getCustomerById(id);
+    }
+
+    /*
+     * This adds items to a cart for the customer
+     * @param it takes in the customer's id and the prodcut's id
+     * @return it returns a customer object
+     */
+    @PostMapping("{cstId}/addToOrder/{prodId}")
+    public Customer addToOrder(@PathVariable long cstId, @PathVariable int prodId){
+        return customerService.addToOrder(cstId,prodId);
+    }
+
+    /*
+     * This will simulate checking out of the order by setting the balance to zero and creating an empty list of products
+     * @param takes in the customer's id
+     * @return returns the customer object
+     */
+    @PatchMapping("{id}")
+    public Customer emptyOrder(@PathVariable long id){
+        return customerService.getCustomerById(id);
     }
 
 }
